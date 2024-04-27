@@ -5,7 +5,8 @@ import { routes } from 'routes';
 const NavPage = () => {
   const location = useLocation();
 
-  const name = routes.find(route => route.path === location.pathname).name;
+  const name =
+    routes.find(route => route.path.includes(location.pathname))?.name ?? '';
 
   return (
     <nav className={st.nav}>
