@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 import st from './SideBar.module.scss';
 import { ReactComponent as Options } from '../Icons/Options.svg';
 import { ReactComponent as ArrowRight } from '../Icons/ArrowRight.svg';
@@ -7,6 +7,7 @@ import { ReactComponent as ArrowRight } from '../Icons/ArrowRight.svg';
 // import { LanguageSwitch } from '../LanguageSwitch/LanguageSwitch';
 
 export const SideBar = ({ sideBarPages }) => {
+  const location = useLocation();
   const [sideBarOpened, setSideBarOpened] = useState(false);
 
   const toggleSideBar = () => {
@@ -45,7 +46,7 @@ export const SideBar = ({ sideBarPages }) => {
         <ul className={st.sidebarContent}>
           {sideBarPages.map(route => (
             <li key={route.name}>
-              <NavLink to={route.path} onClick={toggleSideBar}>
+              <NavLink to={route.path} state={location} onClick={toggleSideBar}>
                 <ArrowRight className={st.menuItemIcons} />
                 {route.name}
               </NavLink>

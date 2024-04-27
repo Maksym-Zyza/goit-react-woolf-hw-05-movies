@@ -4,18 +4,19 @@ import api from '../../api/movies-api';
 import defaultImg from '../../img/default.jpg';
 import Loader from '../Loader/Loader';
 import { text } from '../../helpers/text';
+import { useParams } from 'react-router-dom';
 
 export default function TvShowsDetails() {
+  const { tvShowId } = useParams();
   const [src] = useState('https://image.tmdb.org/t/p/w500');
   const [movies, setMovies] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    const id = window.location.pathname.split('/').pop();
     setIsLoading(true);
 
     api
-      .getTvDetails(id)
+      .getTvDetails(tvShowId)
       .then(result => {
         setMovies({ ...result });
       })

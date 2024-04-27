@@ -6,13 +6,13 @@ export default function PersonDetailsPage() {
   const location = useLocation();
   const navigate = useNavigate();
 
-  const handleGoBack = () => {
-    navigate(location.state?.from ?? '/persons');
-  };
-
   return (
     <div className="container position">
-      <button className="movieBtn" type="button" onClick={handleGoBack}>
+      <button
+        className="movieBtn"
+        type="button"
+        onClick={() => navigate(location.state ?? '/persons')}
+      >
         &#9668; {text.Back}
       </button>
 

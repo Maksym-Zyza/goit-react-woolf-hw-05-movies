@@ -29,9 +29,9 @@ export const LazyRoutes = () => {
           </Route>
           <Route path="/theatres" element={<InTheatresPage />} />
           <Route path="/persons" element={<PersonsPage />} />
-          <Route path="/persons:personId" element={<PersonDetailsPage />} />
+          <Route path="/persons/:personId" element={<PersonDetailsPage />} />
           <Route path="/tvShows" element={<TvShowsPage />} />
-          <Route path="/tvShows:tvShowId" element={<TvShowsDetailsPage />} />
+          <Route path="/tvShows/:tvShowId" element={<TvShowsDetailsPage />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Suspense>

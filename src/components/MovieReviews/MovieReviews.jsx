@@ -1,14 +1,15 @@
 import { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import Loader from '../../components/Loader/Loader';
 import api from '../../api/movies-api';
 import { text } from '../../helpers/text';
 
 const MovieReviews = () => {
+  const { movieId } = useParams();
   const [reviews, setReviews] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    const movieId = window.location.pathname.split('/')[2];
     setIsLoading(true);
 
     api

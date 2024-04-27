@@ -7,10 +7,11 @@ import Loader from '../../components/Loader/Loader';
 import { ReactComponent as Play } from '../Icons/Play.svg';
 import Modal from '../Modal/Modal';
 import MovieVideo from './MovieVideo';
-import { Outlet, useNavigate } from 'react-router-dom';
+import { Outlet, useNavigate, useParams } from 'react-router-dom';
 
 export default function MovieDetails() {
   const navigation = useNavigate();
+  const { movieId } = useParams();
   const [src] = useState('https://image.tmdb.org/t/p/w500');
   const [movies, setMovies] = useState(null);
   const [video, setVideo] = useState('');
@@ -25,7 +26,6 @@ export default function MovieDetails() {
 
   const getMovieDetails = () => {
     setIsLoading(true);
-    const movieId = window.location.pathname.split('/').pop();
     api
       .getMovieDetails(movieId)
       .then(result => {

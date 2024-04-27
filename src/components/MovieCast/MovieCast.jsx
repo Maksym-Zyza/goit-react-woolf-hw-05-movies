@@ -1,18 +1,18 @@
 import { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useParams } from 'react-router-dom';
 import ScrollButton from '../../components/ScrollButton/ScrollButton';
 import Loader from '../../components/Loader/Loader';
 import defaultImg from '../../img/default.jpg';
 import api from '../../api/movies-api';
 
 const MovieCast = () => {
+  const { movieId } = useParams();
   const [cast, setCast] = useState([]);
   const [src] = useState('https://image.tmdb.org/t/p/w500');
   const [isLoading, setIsLoading] = useState(false);
   const location = useLocation();
 
   useEffect(() => {
-    const movieId = window.location.pathname.split('/')[2];
     setIsLoading(true);
 
     api
@@ -32,13 +32,7 @@ const MovieCast = () => {
       <div className="container">
         <ul className="castList">
           {cast.map(({ id, profile_path, name, character }) => (
-            <Link
-              key={id}
-              to={{
-                pathname: `/persons/${id}`,
-                state: { from: location.pathname },
-              }}
-            >
+            <Link key={id} to={`/persons/${id}`} state={location}>
               <li key={id}>
                 {profile_path ? (
                   <img src={`${src}${profile_path}`} alt="Movie poster" />

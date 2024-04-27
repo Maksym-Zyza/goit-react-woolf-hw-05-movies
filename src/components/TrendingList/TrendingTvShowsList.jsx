@@ -14,13 +14,7 @@ const TrendingTvShows = ({ trending, time }) => {
 
       <ul className="moviesList">
         {trending.map(({ id, name, poster_path, vote_average }) => (
-          <Link
-            key={id}
-            to={{
-              pathname: `/tvShows/${id}`,
-              state: { from: location.pathname },
-            }}
-          >
+          <Link key={id} to={`/tvShows/${id}`} state={location}>
             <li>
               {poster_path ? (
                 <img src={`${src}${poster_path}`} alt="TvShows poster" />

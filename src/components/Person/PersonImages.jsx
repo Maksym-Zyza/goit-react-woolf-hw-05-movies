@@ -1,20 +1,21 @@
 import { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import st from './PersonImages.module.scss';
 import Loader from '../../components/Loader/Loader';
 import api from '../../api/movies-api';
 import Modal from '../Modal/Modal';
 
 const PersonImages = ({ showModal, toggleModal }) => {
+  const { personId } = useParams();
   const [src] = useState('https://image.tmdb.org/t/p/w500');
   const [images, setImages] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    const PersonId = window.location.pathname.split('/').pop();
     setIsLoading(true);
 
     api
-      .getPersonImages(PersonId)
+      .getPersonImages(personId)
       .then(result => {
         const newArr = [];
         const newObj = Object.values(result.profiles);

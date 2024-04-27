@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import st from './Details.module.scss';
 import api from '../../api/movies-api';
 import PersonImages from '../../components/Person/PersonImages';
@@ -6,9 +7,10 @@ import defaultImg from '../../img/default.jpg';
 import { text } from '../../helpers/text';
 
 export default function PersonDetails() {
+  const { personId } = useParams();
+
   const [src] = useState('https://image.tmdb.org/t/p/w500');
   const [person, setPerson] = useState({});
-  // MODAL
   const [showModal, setShowModal] = useState(false);
   const toggleModal = () => {
     !showModal
@@ -18,8 +20,7 @@ export default function PersonDetails() {
   };
 
   useEffect(() => {
-    const movieId = window.location.pathname.split('/').pop();
-    api.getPersonDetails(movieId).then(result => {
+    api.getPersonDetails(personId).then(result => {
       setPerson({ ...result });
     });
   }, []);
@@ -65,10 +66,6 @@ export default function PersonDetails() {
             <span>{text.NotFound}</span>
           )}
         </p>
-        {/* <h3>Also known as:</h3>
-        {person?.also_known_as.map(el => (
-          <div key={person.id}>{el}</div>
-        ))} */}
       </div>
     </div>
   );

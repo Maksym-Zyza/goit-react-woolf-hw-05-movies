@@ -1,40 +1,27 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
-class MoviesGallery extends React.Component {
-  state = {
-    src: 'https://image.tmdb.org/t/p/w500',
-    location: useLocation,
-  };
+const MoviesGallery = ({ movies }) => {
+  const location = useLocation();
+  const src = 'https://image.tmdb.org/t/p/w500';
 
-  render() {
-    const { src } = this.state;
-    const { movies, location } = this.props;
-
-    return (
-      <div className="container">
-        <ul className="moviesList">
-          {movies.map(({ id, poster_path, title, vote_average }) => (
-            <Link
-              key={id}
-              to={{
-                pathname: `/movies/${id}`,
-                state: { from: `${location.pathname}` },
-              }}
-            >
-              <li>
-                <img src={`${src}${poster_path}`} alt={title} />
-                <h4> {title}</h4>
-                <div>
-                  <span>{vote_average}</span>
-                </div>
-              </li>
-            </Link>
-          ))}
-        </ul>
-      </div>
-    );
-  }
-}
+  return (
+    <div className="container">
+      <ul className="moviesList">
+        {movies.map(({ id, poster_path, title, vote_average }) => (
+          <Link key={id} to={`/movies/${id}`} state={location}>
+            <li>
+              <img src={`${src}${poster_path}`} alt={title} />
+              <h4> {title}</h4>
+              <div>
+                <span>{vote_average}</span>
+              </div>
+            </li>
+          </Link>
+        ))}
+      </ul>
+    </div>
+  );
+};
 
 export default MoviesGallery;

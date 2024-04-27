@@ -14,13 +14,7 @@ const TrendingPersonsList = ({ trending, time }) => {
 
       <ul className="moviesList">
         {trending.map(({ id, name, profile_path, popularity }) => (
-          <Link
-            key={id}
-            to={{
-              pathname: `/persons/${id}`,
-              state: { from: location.pathname },
-            }}
-          >
+          <Link key={id} to={`/persons/${id}`} state={location}>
             <li>
               {profile_path ? (
                 <img src={`${src}${profile_path}`} alt="Movie poster" />
