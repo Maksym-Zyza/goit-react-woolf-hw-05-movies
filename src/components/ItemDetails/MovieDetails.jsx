@@ -24,7 +24,14 @@ export default function MovieDetails() {
     setShowModal(!showModal);
   };
 
-  const getMovieDetails = () => {
+  const handleShowCast = () => {
+    navigation('cast');
+  };
+  const handleShowReviews = () => {
+    navigation('reviews');
+  };
+
+  useEffect(() => {
     setIsLoading(true);
     api
       .getMovieDetails(movieId)
@@ -36,19 +43,7 @@ export default function MovieDetails() {
         return [];
       })
       .finally(() => setIsLoading(false));
-  };
-
-  const handleShowCast = () => {
-    navigation('cast');
-  };
-  const handleShowReviews = () => {
-    navigation('reviews');
-  };
-
-  useEffect(() => {
-    getMovieDetails();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [movieId]);
 
   useEffect(() => {
     const getVideo = () => {

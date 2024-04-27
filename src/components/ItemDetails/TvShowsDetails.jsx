@@ -25,8 +25,7 @@ export default function TvShowsDetails() {
         return [];
       })
       .finally(() => setIsLoading(false));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [tvShowId]);
 
   return (
     <>

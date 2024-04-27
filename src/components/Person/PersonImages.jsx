@@ -29,8 +29,7 @@ const PersonImages = ({ showModal, toggleModal }) => {
         return [];
       })
       .finally(() => setIsLoading(false));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [personId]);
 
   return (
     <div>
