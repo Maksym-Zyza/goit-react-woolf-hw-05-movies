@@ -1,14 +1,15 @@
 import { useLocation } from 'react-router-dom';
-import st from './Navigetion.module.scss';
-import { routes } from '../../routes';
+import st from './Navigation.module.scss';
+import { routes } from 'routes';
 
 const NavPage = () => {
   const location = useLocation();
 
-  // TODO: Add a function to get the current route name
+  const name = routes.find(route => route.path === location.pathname).name;
+
   return (
     <nav className={st.nav}>
-      <div className={st.NavLink}>{'route.name'}</div>
+      <div className={st.NavLink}>{name}</div>
     </nav>
   );
 };
