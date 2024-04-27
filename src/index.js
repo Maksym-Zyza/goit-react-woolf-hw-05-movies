@@ -8,7 +8,7 @@ const root = createRoot(container);
 
 root.render(
   // <React.StrictMode>
-  <BrowserRouter basename="goit-react-woolf-hw-05-movies">
+  <BrowserRouter>
     <App />
   </BrowserRouter>
   // </React.StrictMode>,

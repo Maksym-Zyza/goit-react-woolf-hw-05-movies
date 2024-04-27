@@ -4,17 +4,11 @@ import { text } from '../../helpers/text';
 
 export const LanguageSwitch = () => {
   const [language, setLanguage] = useState(
-    window.localStorage?.getItem('language'),
+    window.localStorage?.getItem('language') ?? 'en-US'
   );
 
   useEffect(() => {
-    if (language === null) {
-      window.localStorage.setItem('language', 'en-US');
-    }
-  }, []);
-
-  useEffect(() => {
-    setLanguage(window.localStorage?.getItem('language'));
+    setLanguage(window.localStorage?.getItem('language') ?? 'en-US');
   }, [language]);
 
   const changeLanguage = ({ target }) => {

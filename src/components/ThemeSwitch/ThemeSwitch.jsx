@@ -3,13 +3,9 @@ import { darkTheme } from '../../helpers/darkTheme';
 import { ThemeToggler } from './ThemeToggler';
 
 export const ThemeSwitch = () => {
-  const [theme, setTheme] = useState(window.localStorage?.getItem('theme'));
-
-  useEffect(() => {
-    if (theme === null) {
-      window.localStorage.setItem('theme', 'light');
-    }
-  }, []);
+  const [theme, setTheme] = useState(
+    window.localStorage?.getItem('theme') ?? 'light'
+  );
 
   const changeTheme = ({ target }) => {
     if (target.value === 'dark') {
@@ -22,7 +18,7 @@ export const ThemeSwitch = () => {
   };
 
   useEffect(() => {
-    setTheme(window.localStorage.getItem('theme', 'dark'));
+    setTheme(window.localStorage.getItem('theme', 'dark') ?? 'light');
     const style = document.createElement('style');
 
     if (theme === 'dark') {

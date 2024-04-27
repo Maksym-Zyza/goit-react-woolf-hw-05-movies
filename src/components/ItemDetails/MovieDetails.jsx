@@ -40,19 +40,6 @@ export default function MovieDetails() {
       .finally(() => setIsLoading(false));
   };
 
-  const getVideo = () => {
-    api
-      .getMovieVideo(movies.id)
-      .then(result => {
-        setVideo(result.results[0]);
-      })
-      .catch(error => {
-        console.log(error);
-        return [];
-      })
-      .finally(() => setIsLoading(false));
-  };
-
   const handleShowCast = () => {
     setShowCast(true);
     setShowReviews(false);
@@ -67,6 +54,18 @@ export default function MovieDetails() {
   }, []);
 
   useEffect(() => {
+    const getVideo = () => {
+      api
+        .getMovieVideo(movies.id)
+        .then(result => {
+          setVideo(result.results[0]);
+        })
+        .catch(error => {
+          console.log(error);
+          return [];
+        })
+        .finally(() => setIsLoading(false));
+    };
     movies && getVideo();
   }, [movies]);
 
