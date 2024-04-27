@@ -23,6 +23,7 @@ export default function PersonDetails() {
     api.getPersonDetails(personId).then(result => {
       setPerson({ ...result });
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

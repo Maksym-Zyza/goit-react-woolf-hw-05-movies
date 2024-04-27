@@ -1,47 +1,47 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { ReactComponent as SearchLogo } from '../Icons/Search.svg';
-import st from './Searchbar.module.scss';
+import { useSearchParams } from 'react-router-dom';
+import st from './SearchBar.module.scss';
 import { text } from '../../helpers/text';
 
-class Searchbar extends React.Component {
-  state = {
-    search: '',
+const SearchBar = ({ formSubmitQuery }) => {
+  const [value, setValue] = useState('');
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const handleChange = e => {
+    setValue(e.target.value);
   };
 
-  handleChange = e => {
-    this.setState({ search: e.target.value });
-  };
-
-  handleSubmit = e => {
+  const handleSubmit = e => {
     e.preventDefault();
-    // prop to MoviesPage
-    this.props.onSubmit(this.state.search);
-    this.setState({ search: '' });
+    setSearchParams({ search: value });
+    formSubmitQuery(value);
   };
 
-  render() {
-    const { search } = this.state;
+  useEffect(() => {
+    const value = searchParams.get('search');
+    value && setValue(value);
+  }, [searchParams]);
 
-    return (
-      <header className={st.Searchbar}>
-        <form onSubmit={this.handleSubmit} className={st.SearchForm}>
-          <button type="submit" className={st.SearchForm_button}>
-            <SearchLogo className={st.searchLogo} />
-          </button>
+  return (
+    <header className={st.SearchBar}>
+      <form onSubmit={handleSubmit} className={st.SearchForm}>
+        <button type="submit" className={st.SearchForm_button}>
+          <SearchLogo className={st.searchLogo} />
+        </button>
 
-          <input
-            className={st.SearchForm_input}
-            type="text"
-            autoComplete="off"
-            autoFocus
-            placeholder={text.SearchMovies}
-            value={search}
-            onChange={this.handleChange}
-          />
-        </form>
-      </header>
-    );
-  }
-}
+        <input
+          className={st.SearchForm_input}
+          type="text"
+          autoComplete="off"
+          autoFocus
+          placeholder={text.SearchMovies}
+          value={value}
+          onChange={handleChange}
+        />
+      </form>
+    </header>
+  );
+};
 
-export default Searchbar;
+export default SearchBar;

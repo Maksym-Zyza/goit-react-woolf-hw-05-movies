@@ -1,78 +1,62 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import SearchBar from '../components/SearchBar/SearchBar';
 import api from '../api/movies-api';
-import Searchbar from '../components/Searchbar/Searchbar';
 import Loader from '../components/Loader/Loader';
 import Button from '../components/Button/Button';
 import MoviesGallery from '../components/MoviesGallery/MoviesGallery';
 import ScrollButton from '../components/ScrollButton/ScrollButton';
 import Nothing from '../components/Nothing';
 
-class MoviesPage extends React.Component {
-  state = {
-    movies: [],
-    page: 1,
-    query: '',
-    isLoading: false,
-    error: null,
-  };
+const MoviesPage = () => {
+  const [movies, setMovies] = useState([]);
+  const [page, setPage] = useState(1);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
+  const [searchValue, setSearchValue] = useState('');
 
-  componentDidUpdate(prevProps, prevState) {
-    const { query } = this.state;
-    if (prevState.query !== query && query) {
-      this.feachMovies();
-    }
-  }
-
-  formSubmitQuery = search => {
-    this.setState({ query: search, movies: [], page: 1, error: null });
-  };
-
-  feachMovies = () => {
-    const { query, page } = this.state;
-    this.setState({ isLoading: true });
-
+  useEffect(() => {
+    if (!searchValue) return;
+    setIsLoading(true);
     api
-      .getSerchMovies(query, page)
+      .getSearchMovies(searchValue, page)
       .then(response => {
-        this.setState(prevState => ({
-          movies: [...prevState.movies, ...response.data.results],
-          page: prevState.page + 1,
-        }));
+        setMovies(prev => [...prev, ...response.data.results]);
       })
       .catch(error => {
         console.log(error);
         return [];
       })
-      .finally(() => this.setState({ isLoading: false }));
+      .finally(() => setIsLoading(false));
+  }, [searchValue, page]);
+
+  const formSubmitQuery = search => {
+    setSearchValue(search);
+    setError(null);
+    setMovies([]);
+    setPage(1);
   };
 
-  handleChange = e => {
-    this.setState({ query: e.target.value });
+  const loadMore = () => {
+    setPage(prev => prev + 1);
   };
 
-  render() {
-    const { movies, isLoading, error } = this.state;
-    const movieList = movies.length > 0 && !isLoading;
-    const nothing = movies.length === 0;
+  return (
+    <div>
+      <SearchBar formSubmitQuery={formSubmitQuery} />
 
-    return (
-      <div>
-        <Searchbar onSubmit={this.formSubmitQuery} />
+      <MoviesGallery movies={movies} />
 
-        <MoviesGallery movies={movies} />
+      {isLoading && <Loader isLoading={isLoading} />}
 
-        {isLoading && <Loader isLoading={isLoading} />}
+      {movies.length > 0 && <Button onClick={loadMore} />}
 
-        {movieList && <Button onClick={this.feachMovies} />}
+      {movies.length > 0 && <ScrollButton scrollStepInPx="50" delayInMs="16" />}
 
-        {movieList && <ScrollButton scrollStepInPx="50" delayInMs="16" />}
+      {error && <h1>{error}</h1>}
 
-        {error && <h1>{error}</h1>}
-
-        {nothing && <Nothing />}
-      </div>
-    );
-  }
-}
+      {movies.length === 0 && <Nothing />}
+    </div>
+  );
+};
 
 export default MoviesPage;

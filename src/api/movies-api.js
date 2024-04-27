@@ -11,7 +11,6 @@ axios.defaults.params = {
   page: 1,
 };
 
-// список популярных фильмов
 const getMoviesTrending = async (type, time, page) => {
   try {
     const url = { url: `trending/${type}/${time}`, params: { page } };
@@ -23,8 +22,7 @@ const getMoviesTrending = async (type, time, page) => {
   }
 };
 
-// поиск кинофильма по ключевому слову
-async function getSerchMovies(query, page) {
+async function getSearchMovies(query, page) {
   try {
     const url = { url: 'search/movie', params: { query, page } };
     const response = await axios(url);
@@ -35,12 +33,11 @@ async function getSerchMovies(query, page) {
   }
 }
 
-getSerchMovies.propTypes = {
+getSearchMovies.propTypes = {
   query: PropTypes.string.isRequired,
   page: PropTypes.number.isRequired,
 };
 
-// запрос детальной информации о фильме
 async function getMovieDetails(movie_id) {
   try {
     const url = { url: `movie/${movie_id}` };
@@ -63,7 +60,6 @@ async function getMovieVideo(movieId) {
   }
 }
 
-// запрос информации о актёрском составе
 async function getMovieCredits(movie_id) {
   try {
     const url = { url: `movie/${movie_id}/credits` };
@@ -75,7 +71,6 @@ async function getMovieCredits(movie_id) {
   }
 }
 
-// запрос обзоров для страницы кинофильма
 async function getMoviesReviews(movie_id) {
   try {
     const url = { url: `movie/${movie_id}/reviews` };
@@ -87,7 +82,6 @@ async function getMoviesReviews(movie_id) {
   }
 }
 
-// Get the list of popular people. Updates daily.
 async function getPersons(page) {
   try {
     const url = { url: `person/popular`, params: { page } };
@@ -99,7 +93,6 @@ async function getPersons(page) {
   }
 }
 
-// Get the images for a person.
 async function getPersonPopular() {
   try {
     const url = { url: `person/popular` };
@@ -111,7 +104,6 @@ async function getPersonPopular() {
   }
 }
 
-// запрос детальной информации для страницы персон
 async function getPersonImages(person_id) {
   try {
     const url = { url: `person/${person_id}/images` };
@@ -135,7 +127,6 @@ async function getPersonDetails(person_id) {
   }
 }
 
-// запрос детальной информации для страницы TV shows
 async function getTvDetails(movie_id) {
   try {
     const url = { url: `tv/${movie_id}` };
@@ -181,7 +172,7 @@ const getMostPopular = async page => {
 
 const api = {
   getMoviesTrending,
-  getSerchMovies,
+  getSearchMovies,
   getMovieDetails,
   getMovieVideo,
   getPersons,
