@@ -30,7 +30,7 @@ const MovieCast = () => {
   return (
     <>
       <div className="container">
-        <ul className="castLisl">
+        <ul className="castList">
           {cast.map(({ id, profile_path, name, character }) => (
             <Link
               key={id}

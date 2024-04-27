@@ -3,18 +3,10 @@ import { NavLink } from 'react-router-dom';
 import st from './SideBar.module.scss';
 import { ReactComponent as Options } from '../Icons/Options.svg';
 import { ReactComponent as ArrowRight } from '../Icons/ArrowRight.svg';
-import { ThemeSwitch } from '../ThemeSwitch/ThemeSwitch';
-import { LanguageSwitch } from '../LanguageSwitch/LanguageSwitch';
-import { text } from '../..//helpers/text';
-import { routes } from '../../routes';
+// import { ThemeSwitch } from '../ThemeSwitch/ThemeSwitch';
+// import { LanguageSwitch } from '../LanguageSwitch/LanguageSwitch';
 
-const pagesHidden = [
-  text.MovieDetails,
-  text.PersonDetails,
-  text.TvShowsDetails,
-];
-
-export const SideBar = () => {
+export const SideBar = ({ sideBarPages }) => {
   const [sideBarOpened, setSideBarOpened] = useState(false);
 
   const toggleSideBar = () => {
@@ -51,23 +43,18 @@ export const SideBar = () => {
         }
       >
         <ul className={st.sidebarContent}>
-          {routes
-            .filter(route => (pagesHidden.includes(route.name) ? null : route))
-            .map(route => (
-              <li
-                key={route.name}
-                className={route.disabled ? st.disabled : ''}
-              >
-                <NavLink to={route.path} onClick={toggleSideBar}>
-                  <ArrowRight className={st.menuItemIcons} />
-                  {route.name}
-                </NavLink>
-              </li>
-            ))}
+          {sideBarPages.map(route => (
+            <li key={route.name}>
+              <NavLink to={route.path} onClick={toggleSideBar}>
+                <ArrowRight className={st.menuItemIcons} />
+                {route.name}
+              </NavLink>
+            </li>
+          ))}
         </ul>
 
-        <ThemeSwitch />
-        <LanguageSwitch />
+        {/* <ThemeSwitch />
+        <LanguageSwitch /> */}
       </div>
     </>
   );

@@ -115,21 +115,21 @@ export const darkTheme = `
       text-decoration-color: initial;
       outline-color: rgb(38, 142, 164);
     }
-    .castLisl {
+    .castList {
       list-style-image: initial;
     }
-    .castLisl a {
+    .castList a {
       text-decoration-color: initial;
       color: rgb(222, 211, 193);
     }
-    .castLisl a li {
+    .castList a li {
       background-color: rgb(37, 140, 162);
       box-shadow: rgba(99, 100, 97, 0.5) 0px 0px 20px;
     }
-    .castLisl a li img {
+    .castList a li img {
       border-bottom-color: rgb(53, 54, 52);
     }
-    .castLisl a li h3 {
+    .castList a li h3 {
       color: rgb(252, 242, 224);
       text-decoration-color: initial;
     }
