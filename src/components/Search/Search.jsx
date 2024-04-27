@@ -14,8 +14,8 @@ const Search = ({ formSubmitQuery }) => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    setSearchParams({ search: value });
     formSubmitQuery(value);
+    setSearchParams(value !== '' ? { search: value } : {});
   };
 
   useEffect(() => {
