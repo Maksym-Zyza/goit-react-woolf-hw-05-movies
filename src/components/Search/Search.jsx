@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { ReactComponent as SearchLogo } from '../Icons/Search.svg';
 import { useSearchParams } from 'react-router-dom';
-import st from './SearchBar.module.scss';
+import st from './Search.module.scss';
 import { text } from '../../helpers/text';
 
-const SearchBar = ({ formSubmitQuery }) => {
+const Search = ({ formSubmitQuery }) => {
   const [value, setValue] = useState('');
   const [searchParams, setSearchParams] = useSearchParams();
 
@@ -44,4 +44,4 @@ const SearchBar = ({ formSubmitQuery }) => {
   );
 };
 
-export default SearchBar;
+export default Search;

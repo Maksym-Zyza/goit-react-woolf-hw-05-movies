@@ -5,7 +5,7 @@ import Button from '../components/Button/Button';
 import MoviesGallery from '../components/MoviesGallery/MoviesGallery';
 import ScrollButton from '../components/ScrollButton/ScrollButton';
 import Nothing from '../components/Nothing';
-import SearchBar from 'components/SearchBar';
+import Search from 'components/Search';
 
 const MoviesPage = () => {
   const [movies, setMovies] = useState([]);
@@ -42,7 +42,7 @@ const MoviesPage = () => {
 
   return (
     <div>
-      <SearchBar formSubmitQuery={formSubmitQuery} />
+      <Search formSubmitQuery={formSubmitQuery} />
 
       <MoviesGallery movies={movies} />
 
