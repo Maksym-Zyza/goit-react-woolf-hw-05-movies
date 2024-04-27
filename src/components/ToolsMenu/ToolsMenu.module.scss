@@ -1,0 +1,68 @@
+.toolDots {
+  position: absolute;
+  top: 62px;
+  right: 15px;
+  width: 28px;
+  height: 28px;
+  fill: #01b4e4;
+  cursor: pointer;
+
+  &:hover {
+    transform: scale(1.1);
+  }
+}
+
+.toolBarWrapper {
+  z-index: 10;
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.toolBar {
+  position: absolute;
+  z-index: 11;
+  right: 0;
+  top: 100px;
+  width: 240px;
+  background: #90caf9;
+  transition: ease-in-out 0.25s;
+  border-radius: 5px;
+  @media screen and (max-width: 700px) {
+    width: 200px;
+  }
+
+  ul {
+    margin: o;
+  }
+
+  li {
+    display: flex;
+    align-items: center;
+    padding: 20px 9px;
+    font-size: 19px;
+    font-weight: 600;
+    color: #fff;
+    cursor: pointer;
+    text-decoration: none;
+
+    &:hover {
+      background: #01b4e4;
+    }
+    &:hover svg {
+      color: #90caf9;
+    }
+
+    svg {
+      margin-right: 8px;
+      color: #fff;
+    }
+  }
+}
+
+.active {
+  background: #01b4e4;
+}

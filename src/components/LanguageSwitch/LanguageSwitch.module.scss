@@ -1,0 +1,28 @@
+.btn {
+  display: flex;
+  margin: 0 20px;
+  align-items: center;
+
+  p {
+    margin-right: 10px;
+    font-size: 19px;
+    font-weight: 600;
+    color: #47b4e4;
+  }
+
+  label {
+    font-size: 19px;
+    font-weight: 600;
+    color: #fff;
+    cursor: pointer;
+  }
+
+  input {
+    display: none;
+  }
+
+  svg {
+    width: 35px;
+    cursor: pointer;
+  }
+}

@@ -1,0 +1,21 @@
+.scroll {
+  position: fixed;
+  right: 10px;
+  bottom: 10px;
+  padding: 0;
+  width: 40px;
+  height: 40px;
+  border: none;
+  border-radius: 5px;
+  background: #01b4e4;
+  opacity: 0.5;
+
+  &:hover {
+    opacity: 0.8;
+  }
+}
+
+.arrowUp {
+  width: 34px;
+  height: 34px;
+}

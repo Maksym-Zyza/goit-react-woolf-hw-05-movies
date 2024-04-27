@@ -1,0 +1,37 @@
+.btn {
+  display: flex;
+  margin: 0 20px;
+  align-items: center;
+
+  p {
+    margin-right: 8px;
+    font-size: 19px;
+    font-weight: 600;
+    color: #47b4e4;
+  }
+
+  input {
+    display: none;
+  }
+
+  svg {
+    width: 31px;
+    cursor: pointer;
+    border: 2px grey;
+    &:hover {
+      transition: 1s linear;
+      transform: scale(1.1);
+    }
+  }
+
+  .moon {
+    path {
+      fill: #fff;
+    }
+  }
+  .sun {
+    path {
+      fill: #e4dac8;
+    }
+  }
+}

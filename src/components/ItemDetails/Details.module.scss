@@ -1,0 +1,119 @@
+.details {
+  position: relative;
+
+  h2 {
+    font-size: 20px;
+    text-align: center;
+    color: #01b4e4;
+  }
+
+  .imgHover {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+
+    img {
+      width: 380px;
+      filter: drop-shadow(4px 4px 4px rgba(55%, 55%, 55%, 0.6));
+      box-shadow: 0 0 20px rgba(55%, 55%, 55%, 0.5);
+    }
+
+    &:hover {
+      transition: 1s linear;
+      box-shadow: 0 0 20px rgb(1, 180, 228, 0.9);
+    }
+    &:hover path {
+      transition: 1s linear;
+      fill: rgb(1, 180, 228, 0.9);
+    }
+  }
+
+  .movieDetails {
+    position: absolute;
+    left: 430px;
+    top: 30px;
+    display: inline-block;
+    padding-right: 40px;
+    @media screen and (max-width: 700px) {
+      position: static;
+      padding-right: 10px;
+    }
+
+    h3 {
+      margin-bottom: 7px;
+    }
+
+    p {
+      display: block;
+      word-break: break-word;
+      text-align: justify;
+      color: #01b4e4;
+
+      a {
+        text-decoration: none;
+      }
+
+      span {
+        padding-left: 4px;
+        color: #01b4e4;
+        font-weight: 600;
+        text-decoration: none;
+      }
+    }
+  }
+}
+
+.link {
+  width: 120px;
+  text-align: center;
+  font-size: 18px;
+  padding: 5px;
+  margin-top: 10px;
+  color: #47b4e4;
+  background: #fff;
+  border: 2px solid #01b4e4;
+  border-radius: 5px;
+  margin-right: 20px;
+  cursor: pointer;
+  &:hover {
+    color: white;
+    background-color: #01b4e4;
+    border-radius: 3px;
+    transition: 0.5s linear;
+    box-shadow: 0 0 20px rgb(1 180 228 / 50%);
+  }
+
+  .linkSign {
+    font-size: 15px;
+    padding-left: 5px;
+  }
+}
+
+.btnPlay {
+  position: absolute !important;
+  left: 24% !important;
+  top: 12rem !important;
+  cursor: pointer;
+  & svg path {
+    fill: rgb(1, 180, 228, 0.5);
+  }
+  @media screen and (max-width: 425px) {
+    left: 22% !important;
+    top: 11rem !important;
+  }
+}
+
+.movieVideo {
+  & > div {
+    margin: 1rem auto;
+    width: 93% !important;
+    height: 27rem !important;
+  }
+}
+
+.noVideo {
+  margin: 4rem auto;
+  text-align: center;
+  font-size: 22px;
+  color: #47b4e4;
+}
