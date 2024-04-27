@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import SearchBar from '../components/SearchBar/SearchBar';
 import api from '../api/movies-api';
 import Loader from '../components/Loader/Loader';
 import Button from '../components/Button/Button';
 import MoviesGallery from '../components/MoviesGallery/MoviesGallery';
 import ScrollButton from '../components/ScrollButton/ScrollButton';
 import Nothing from '../components/Nothing';
+import SearchBar from 'components/SearchBar';
 
 const MoviesPage = () => {
   const [movies, setMovies] = useState([]);
