@@ -1,7 +1,8 @@
 import { SideBar } from '../components/SideBar/SideBar';
-import Navigation from './Navigation/Navigation';
+import Navigation from '../components/Navigation/Navigation';
 import Logo from '../components/Logo/Logo';
 import { text } from 'helpers/text';
+import { Outlet } from 'react-router-dom';
 
 const sideBarPages = [
   {
@@ -26,14 +27,17 @@ const sideBarPages = [
   },
 ];
 
-const AppBar = () => {
+const MainLayout = () => {
   return (
-    <header>
-      <SideBar sideBarPages={sideBarPages} />
-      <Navigation sideBarPages={sideBarPages} />
-      <Logo />
-    </header>
+    <>
+      <header>
+        <SideBar sideBarPages={sideBarPages} />
+        <Navigation sideBarPages={sideBarPages} />
+        <Logo />
+      </header>
+      <Outlet />
+    </>
   );
 };
 
-export default AppBar;
+export default MainLayout;
