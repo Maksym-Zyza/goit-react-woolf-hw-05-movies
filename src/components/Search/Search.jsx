@@ -5,8 +5,8 @@ import st from './Search.module.scss';
 import { text } from '../../helpers/text';
 
 const Search = ({ formSubmitQuery }) => {
-  const [value, setValue] = useState('');
   const [searchParams, setSearchParams] = useSearchParams();
+  const [value, setValue] = useState(searchParams.get('search') ?? '');
 
   const handleChange = e => {
     setValue(e.target.value);
@@ -14,8 +14,10 @@ const Search = ({ formSubmitQuery }) => {
 
   const handleSubmit = e => {
     e.preventDefault();
+    const search = searchParams.get('search');
+    if (value === search || !value) return;
     formSubmitQuery(value);
-    setSearchParams(value !== '' ? { search: value } : {});
+    setSearchParams({ search: value });
   };
 
   useEffect(() => {
