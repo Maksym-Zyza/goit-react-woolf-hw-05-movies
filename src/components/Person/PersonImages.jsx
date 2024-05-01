@@ -4,10 +4,10 @@ import st from './PersonImages.module.scss';
 import Loader from '../../components/Loader/Loader';
 import api from '../../api/movies-api';
 import Modal from '../Modal/Modal';
+import { IMG_SRC } from 'variables';
 
 const PersonImages = ({ showModal, toggleModal }) => {
   const { personId } = useParams();
-  const [src] = useState('https://image.tmdb.org/t/p/w500');
   const [images, setImages] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -37,7 +37,11 @@ const PersonImages = ({ showModal, toggleModal }) => {
         <Modal onClose={toggleModal}>
           {images?.map(el => (
             <div key={el}>
-              <img className={st.img} src={`${src}${el}`} alt="Person poster" />
+              <img
+                className={st.img}
+                src={`${IMG_SRC}${el}`}
+                alt="Person poster"
+              />
             </div>
           ))}
         </Modal>

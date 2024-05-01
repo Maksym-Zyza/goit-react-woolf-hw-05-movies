@@ -4,11 +4,11 @@ import ScrollButton from '../../components/ScrollButton/ScrollButton';
 import Loader from '../../components/Loader/Loader';
 import defaultImg from '../../img/default.jpg';
 import api from '../../api/movies-api';
+import { IMG_SRC } from 'variables';
 
 const MovieCast = () => {
   const { movieId } = useParams();
   const [cast, setCast] = useState([]);
-  const [src] = useState('https://image.tmdb.org/t/p/w500');
   const [isLoading, setIsLoading] = useState(false);
   const location = useLocation();
 
@@ -34,11 +34,10 @@ const MovieCast = () => {
           {cast.map(({ id, profile_path, name, character }) => (
             <Link key={id} to={`/persons/${id}`} state={location}>
               <li key={id}>
-                {profile_path ? (
-                  <img src={`${src}${profile_path}`} alt="Movie poster" />
-                ) : (
-                  <img src={defaultImg} alt="Was not found" />
-                )}
+                <img
+                  src={profile_path ? `${IMG_SRC}${profile_path}` : defaultImg}
+                  alt="Movie poster"
+                />
                 <h3>{name}</h3>
                 <p>{character}</p>
               </li>

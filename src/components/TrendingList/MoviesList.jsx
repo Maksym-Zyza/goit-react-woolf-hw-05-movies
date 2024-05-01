@@ -1,10 +1,9 @@
-import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { text } from '../../helpers/text';
 import defaultImg from '../../img/default.jpg';
+import { IMG_SRC } from 'variables';
 
 const MoviesList = ({ trending, time }) => {
-  const [src] = useState('https://image.tmdb.org/t/p/w500');
   const location = useLocation();
   let title = time === 'day' ? text.TitleMovies : text.WeekMovies;
   if (time === 'inTheatres') {
@@ -20,7 +19,7 @@ const MoviesList = ({ trending, time }) => {
           <Link key={id} to={`/movies/${id}`} state={location}>
             <li>
               {poster_path ? (
-                <img src={`${src}${poster_path}`} alt="Movie poster" />
+                <img src={`${IMG_SRC}${poster_path}`} alt="Movie poster" />
               ) : (
                 <img src={defaultImg} alt="Was not found" />
               )}

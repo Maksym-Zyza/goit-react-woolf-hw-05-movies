@@ -5,11 +5,10 @@ import api from '../../api/movies-api';
 import PersonImages from '../../components/Person/PersonImages';
 import defaultImg from '../../img/default.jpg';
 import { text } from '../../helpers/text';
+import { IMG_SRC } from 'variables';
 
 export default function PersonDetails() {
   const { personId } = useParams();
-
-  const [src] = useState('https://image.tmdb.org/t/p/w500');
   const [person, setPerson] = useState({});
   const [showModal, setShowModal] = useState(false);
   const toggleModal = () => {
@@ -32,11 +31,14 @@ export default function PersonDetails() {
       <h2>{person.name}</h2>
 
       <span className={st.imgHover} onClick={toggleModal}>
-        {person?.profile_path ? (
-          <img src={`${src}${person?.profile_path}`} alt="Person poster" />
-        ) : (
-          <img src={defaultImg} alt="Was not found" />
-        )}
+        <img
+          src={
+            person?.profile_path
+              ? `${IMG_SRC}${person?.profile_path}`
+              : defaultImg
+          }
+          alt="Person poster"
+        />
       </span>
 
       <div>

@@ -5,10 +5,10 @@ import defaultImg from '../../img/default.jpg';
 import Loader from '../Loader/Loader';
 import { text } from '../../helpers/text';
 import { useParams } from 'react-router-dom';
+import { IMG_SRC } from 'variables';
 
 export default function TvShowsDetails() {
   const { tvShowId } = useParams();
-  const [src] = useState('https://image.tmdb.org/t/p/w500');
   const [movies, setMovies] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -32,11 +32,14 @@ export default function TvShowsDetails() {
       {movies ? (
         <div className={st.details}>
           <h2>{movies.name}</h2>
-          {movies?.poster_path ? (
-            <img src={`${src}${movies?.poster_path}`} alt="Poster poster" />
-          ) : (
-            <img src={defaultImg} alt="Was not found" />
-          )}
+          <img
+            src={
+              movies?.poster_path
+                ? `${IMG_SRC}${movies?.poster_path}`
+                : defaultImg
+            }
+            alt="Poster poster"
+          />
 
           <div className={st.details}>
             <p>
@@ -60,7 +63,7 @@ export default function TvShowsDetails() {
               : `We don't have any ganres for this TV Shows.`}
 
             <h3>{text.Poster}</h3>
-            <img src={`${src}${movies?.backdrop_path}`} alt="Poster" />
+            <img src={`${IMG_SRC}${movies?.backdrop_path}`} alt="Poster" />
           </div>
         </div>
       ) : (

@@ -1,10 +1,9 @@
-import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { text } from '../../helpers/text';
 import defaultImg from '../../img/default.jpg';
+import { IMG_SRC } from 'variables';
 
 const TrendingTvShows = ({ trending, time }) => {
-  const [src] = useState('https://image.tmdb.org/t/p/w500');
   const location = useLocation();
   const title = time === 'day' ? text.TitleTrending : text.WeekTrending;
 
@@ -16,11 +15,10 @@ const TrendingTvShows = ({ trending, time }) => {
         {trending.map(({ id, name, poster_path, vote_average }) => (
           <Link key={id} to={`/tvShows/${id}`} state={location}>
             <li>
-              {poster_path ? (
-                <img src={`${src}${poster_path}`} alt="TvShows poster" />
-              ) : (
-                <img src={defaultImg} alt="Was not found" />
-              )}
+              <img
+                src={poster_path ? `${IMG_SRC}${poster_path}` : defaultImg}
+                alt="TvShows poster"
+              />
               <h4> {name}</h4>
               <div>
                 <span>{vote_average}</span>
