@@ -1,3 +1,4 @@
+import { getVoteAverageValue } from 'helpers/vote';
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { IMG_SRC } from 'variables';
@@ -14,13 +15,7 @@ const MoviesGallery = ({ movies }) => {
               <img src={`${IMG_SRC}${poster_path}`} alt={title} />
               <h4> {title}</h4>
               <div>
-                <span>
-                  {vote_average > 0
-                    ? parseFloat(Math.round(vote_average * 100) / 100).toFixed(
-                        1
-                      )
-                    : 0}
-                </span>
+                <span>{getVoteAverageValue(vote_average)}</span>
               </div>
             </li>
           </Link>
