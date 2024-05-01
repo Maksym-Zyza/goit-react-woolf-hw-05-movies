@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import ScrollButton from '../components/ScrollButton/ScrollButton';
 import MoviesList from '../components/TrendingList/MoviesList';
 import ToolsMenu from '../components/ToolsMenu/ToolsMenu';
@@ -6,74 +7,54 @@ import Button from '../components/Button/Button';
 import Loader from '../components/Loader/Loader';
 import api from '../api/movies-api';
 
-class HomePage extends React.Component {
-  state = {
-    trending: [],
-    isLoading: false,
-    type: 'movie',
-    time: 'day',
-    page: 1,
-  };
+const HomePage = () => {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [trending, setTrending] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [time, setTime] = useState(searchParams.get('time') ?? 'day');
+  const [page, setPage] = useState(Number(searchParams.get('page') ?? 1));
 
-  componentDidMount() {
-    this.fetchTrending();
-  }
-
-  componentDidUpdate(_, prevState) {
-    const { time, type } = this.state;
-
-    if (prevState.time !== time && time) {
-      this.setState({ trending: [] });
-      this.fetchTrending();
-    }
-    if (prevState.type !== type && type) {
-      this.setState({ trending: [] });
-      this.fetchTrending();
-    }
-  }
-
-  fetchTrending = () => {
-    const { type, time, page } = this.state;
-    this.setState({ isLoading: true });
-
+  useEffect(() => {
+    setIsLoading(true);
     api
-      .getMoviesTrending(type, time, page)
+      .getMoviesTrending('movie', time, page)
       .then(results => {
-        this.setState(prevState => ({
-          trending: [...prevState.trending, ...results],
-          page: prevState.page + 1,
-        }));
+        setTrending(prev => [...prev, ...results]);
+        setSearchParams({ page, time });
       })
       .catch(error => {
         console.log(error);
         return [];
       })
-      .finally(() => this.setState({ isLoading: false }));
+      .finally(() => setIsLoading(false));
+  }, [time, page, setSearchParams]);
+
+  const handlePeriod = e => {
+    if (time === e.target.dataset.value) return;
+    setTime(e.target.dataset.value);
+    setPage(1);
+    setTrending([]);
   };
 
-  changeSelect(e) {
-    this.setState({ time: e.target.dataset.value, page: 1 });
-    console.log('time>>', this.state.time);
-  }
+  const handleBtn = () => {
+    setPage(prev => prev + 1);
+  };
 
-  render() {
-    const { trending, isLoading, time } = this.state;
-    const movieList = trending.length > 0 && !isLoading;
+  return (
+    <div className="container">
+      <MoviesList trending={trending} time={time} />
 
-    return (
-      <div className="container">
-        <MoviesList trending={trending} time={time} />
+      <ToolsMenu changeSelect={handlePeriod} />
 
-        <ToolsMenu changeSelect={this.changeSelect.bind(this)} />
+      {trending.length > 0 && (
+        <ScrollButton scrollStepInPx="50" delayInMs="16" />
+      )}
 
-        {movieList && <ScrollButton scrollStepInPx="50" delayInMs="16" />}
+      {trending.length > 0 && <Button onClick={handleBtn} />}
 
-        {movieList && <Button onClick={this.fetchTrending} />}
-
-        {isLoading && <Loader isLoading={isLoading} />}
-      </div>
-    );
-  }
-}
+      {isLoading && <Loader isLoading={isLoading} />}
+    </div>
+  );
+};
 
 export default HomePage;
