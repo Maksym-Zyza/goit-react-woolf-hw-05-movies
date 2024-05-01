@@ -14,7 +14,13 @@ const MoviesGallery = ({ movies }) => {
               <img src={`${src}${poster_path}`} alt={title} />
               <h4> {title}</h4>
               <div>
-                <span>{vote_average}</span>
+                <span>
+                  {vote_average > 0
+                    ? parseFloat(Math.round(vote_average * 100) / 100).toFixed(
+                        1
+                      )
+                    : 0}
+                </span>
               </div>
             </li>
           </Link>
