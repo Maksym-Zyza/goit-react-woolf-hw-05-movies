@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import api from '../api/movies-api';
 import Loader from '../components/Loader/Loader';
 import Button from '../components/Button/Button';
@@ -8,11 +9,14 @@ import Nothing from '../components/Nothing';
 import Search from 'components/Search';
 
 const MoviesPage = () => {
+  const [searchParams, setSearchParams] = useSearchParams();
   const [movies, setMovies] = useState([]);
-  const [page, setPage] = useState(1);
+  const [page, setPage] = useState(Number(searchParams.get('page') ?? 1));
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
-  const [searchValue, setSearchValue] = useState('');
+  const [searchValue, setSearchValue] = useState(
+    searchParams.get('search') ?? ''
+  );
 
   useEffect(() => {
     if (!searchValue) return;
@@ -34,10 +38,12 @@ const MoviesPage = () => {
     setError(null);
     setMovies([]);
     setPage(1);
+    setSearchParams({ search, page: 1 });
   };
 
   const loadMore = () => {
     setPage(prev => prev + 1);
+    setSearchParams({ search: searchValue, page: page + 1 });
   };
 
   return (
